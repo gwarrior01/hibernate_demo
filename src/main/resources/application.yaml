@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: mysecretpassword
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        default-schema: test
+#        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
