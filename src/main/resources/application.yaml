@@ -1,14 +1,18 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:p6spy:postgresql://localhost:5432/homer
     username: postgres
-    password: mysecretpassword
-    driverClassName: org.postgresql.Driver
+    password: homer_forever
+    driverClassName: com.p6spy.engine.spy.P6SpyDriver
   jpa:
     properties:
       hibernate:
-        default-schema: test
-#        format_sql: true
+        default-schema: homer
+        #        format_sql: true
+        use_sql_comments: true
+        session_factory:
+          statement_inspector: com.example.demo.sqltracker.StatementInspectorImpl
+        generate_statistics: true
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: create
+#    show-sql: true
