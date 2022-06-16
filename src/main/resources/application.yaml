@@ -13,6 +13,7 @@ spring:
         session_factory:
           statement_inspector: com.example.demo.sqltracker.StatementInspectorImpl
         generate_statistics: true
+#        batch_fetch_style: legacy
     hibernate:
       ddl-auto: create
 #    show-sql: true
