@@ -1,12 +1,14 @@
-package com.example.demo._nplusone.batchfetching.entity;
+package com.example.demo._cartesianproduct.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,6 @@ import java.util.Set;
 @Entity(name = "users")
 @Getter
 @Setter
-@BatchSize(size = 32)
 public class User {
 
     @Id
@@ -26,10 +27,11 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
     @OneToMany(
+            fetch = FetchType.EAGER,
             mappedBy = "user",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             orphanRemoval = true
     )
-    @BatchSize(size = 20)
+    @Fetch(FetchMode.SELECT)
     private Set<Address> knownAddresses = new HashSet<>();
 }

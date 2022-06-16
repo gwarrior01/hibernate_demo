@@ -1,8 +1,9 @@
-package com.example.demo._nplusone.batchfetching.entity;
+package com.example.demo._nplusone.subselect.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,6 @@ import java.util.Set;
 @Entity(name = "users")
 @Getter
 @Setter
-@BatchSize(size = 32)
 public class User {
 
     @Id
@@ -30,6 +30,6 @@ public class User {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             orphanRemoval = true
     )
-    @BatchSize(size = 20)
+    @Fetch(FetchMode.SUBSELECT)
     private Set<Address> knownAddresses = new HashSet<>();
 }
